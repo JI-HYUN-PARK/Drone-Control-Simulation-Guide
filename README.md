@@ -1,5 +1,5 @@
 # Drone-Control-Simulation-Guide
-[Ubuntu 22.04.LTS] Gazebo(garden)-PX4-Ros2(Humble)-QGroundControl-PlotJuggler를 활용한 드론 제어 시뮬레이션 진행
+[Ubuntu 22.04.LTS] Gazebo(garden)_PX4_Ros2(Humble)_QGroundControl_PlotJuggler를 활용한 드론 제어 시뮬레이션 진행
 
 ---
 
@@ -87,7 +87,7 @@ PX4 Autopilot 소스 코드를 다운로드하고 시뮬레이션 환경을 설�
 재부팅 후(생략 가능), PX4-Autopilot 디렉토리로 이동하여 Gazebo 시뮬레이션을 실행한다.
     
     cd ~/PX4-Autopilot
-    make px4_sitl gz_x500
+    make px4_sitl gz_x500  // 실행
     
 이 명령어는 PX4 SITL(Software-In-The-Loop)과 Gazebo 시뮬레이터를 동시에 실행시킨다.
 <br>
@@ -103,10 +103,74 @@ PX4_GZ_WORLD=windy PX4_HOME_LAT=37.418613 PX4_HOME_LON=126.714935 PX4_HOME_ALT=3
 ```
 
 
-
-
-
 ### 3. QGroundControl (QGC) 설치
+QGC는 AppImage 파일 형태로 배포되어 설치가 간편하다.
+
+#### 1) ModemManager 제거 및 권한 설정
+QGC가 시리얼 포트를 사용하기 위해 필요한 설정이다.
+
+	sudo usermod -a -G dialout $USER
+	sudo apt-get remove modemmanager -y
+	sudo apt install gstreamer1.0-plugins-bad gstreamer1.0-libav gstreamer1.0-gl -y
+
+변경사항을 적용하기 위해 로그아웃 후 다시 로그인하거나 재부팅해야 한다.
+
+
+#### 2) QGC AppImage 다운로드
+PX4 공식 홈페이지<https://docs.qgroundcontrol.com/master/en/qgc-user-guide/getting_started/download_and_install.html>에서 QGroundControl-x86_64.AppImage 파일을 다운로드한다.
+이 버전에는 개발용 도구가 포함되어 있어 시뮬레이션에 더 적합하다.
+
+*본인 OS 환경에 맞춰 다운받으면 된다.
+
+(운영자기준 - Ubuntu Linux)
+QGroundControl-x86_64.AppImage 파일 다운받았다.
+
+
+#### 3) 실행 권한 부여 및 실행
+다운로드한 파일이 있는 디렉토리로 이동하여 실행 권한을 부여하고 실행한다.
+
+	cd ~/Downloads  // 운영자는 Download 파일에 다운 받음
+	chmod +x ./QGroundControl.AppImage  // 실행 권한 부여
+	./QGroundControl.AppImage  // 실행
+ 
+QGC가 실행되면 자동으로 Gazebo 시뮬레이터에 연결된 드론을 인식할 것입니다.
+
+
+### 4. ROS 2와 PX4 연동
+PX4는 Micro-XRCE-DDS Agent를 통해 ROS 2와 통신한다.
+
+#### 1) ROS 2 워크스페이스 생성
+
+	mkdir -p ~/ros2_ws/src
+	cd ~/ros2_ws/src
+
+
+#### 2) 필요한 패키지 클론
+
+	git clone https://github.com/PX4/px4_msgs.git
+	git clone https://github.com/PX4/px4_ros_com.git
+
+
+#### 3) Micro-XRCE-DDS-Agent 설치
+
+	git clone https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
+	cd Micro-XRCE-DDS-Agent
+	mkdir build
+	cd build
+	cmake ..
+	make
+	sudo make install
+	sudo ldconfig /usr/local/lib/
+
+
+#### 4) ROS 2 워크스페이스 빌드
+
+	cd ~/ros2_ws
+	source /opt/ros/humble/setup.bash
+	colcon build
+
+
+#### 5) 연동 실행
 
 
 
@@ -123,13 +187,5 @@ PX4_GZ_WORLD=windy PX4_HOME_LAT=37.418613 PX4_HOME_LON=126.714935 PX4_HOME_ALT=3
 
 
 
-
-
-
-
-
-
-
-
-
+ 
 
