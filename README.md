@@ -229,7 +229,7 @@ gedit ~/plotjuggler.sh
 	ros2 run plotjuggler plotjuggler
  
 
-### 6. 연동 실행 (이후 실행할 때 참고)
+### 6. 빠른 실행
 
 #### * 터미널 1: PX4 SITL & Gazebo 실행
 
