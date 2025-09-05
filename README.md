@@ -94,6 +94,7 @@ PX4 Autopilot 소스 코드를 다운로드하고 시뮬레이션 환경을 설�
     
 이 명령어는 PX4 SITL(Software-In-The-Loop)과 Gazebo 시뮬레이터를 동시에 실행시킨다.
 <br>
+<br>
 
 [참고]
 
@@ -101,9 +102,9 @@ PX4 공식 가이드 <https://docs.px4.io/main/en/sim_gazebo_gz/>를 참고하�
 
 
 예) 바람(windy) 시뮬레이션 환경에서 서울의 특정 위치(위도, 경도, 고도)를 홈 위치로 설정하여 PX4 SITL 드론 시뮬레이션을 실행한다.
-```
-PX4_GZ_WORLD=windy PX4_HOME_LAT=37.418613 PX4_HOME_LON=126.714935 PX4_HOME_ALT=30 make px4_sitl gz_x500
-```
+	```
+	PX4_GZ_WORLD=windy PX4_HOME_LAT=37.418613 PX4_HOME_LON=126.714935 PX4_HOME_ALT=30 make px4_sitl gz_x500
+	```
 
 
 ### 3. QGroundControl (QGC) 설치
@@ -228,7 +229,7 @@ gedit ~/plotjuggler.sh
 	ros2 run plotjuggler plotjuggler
  
 
-### 6. 연동 실행 (정리)
+### 6. 연동 실행 (이후 실행할 때 참고)
 
 #### * 터미널 1: PX4 SITL & Gazebo 실행
 
