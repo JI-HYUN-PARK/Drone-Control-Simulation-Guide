@@ -66,7 +66,7 @@ PX4 공식 문서에서는 우분투 22.04에 ROS 2 Humble Hawksbill을 설치�
     echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
     source ~/.bashrc
   ```
-
+---
 
 ### 2. PX4 SITL & Gazebo 설치
 PX4 Autopilot 소스 코드를 다운로드하고 시뮬레이션 환경을 설정한다.
@@ -106,7 +106,7 @@ PX4 공식 가이드 <https://docs.px4.io/main/en/sim_gazebo_gz/>를 참고하�
 	PX4_GZ_WORLD=windy PX4_HOME_LAT=37.418613 PX4_HOME_LON=126.714935 PX4_HOME_ALT=30 make px4_sitl gz_x500
 	```
 
-
+---
 ### 3. QGroundControl (QGC) 설치
 QGC는 AppImage 파일 형태로 배포되어 설치가 간편하다.
 
@@ -139,7 +139,7 @@ QGroundControl-x86_64.AppImage 파일 다운받았다.
  
 QGC가 실행되면 자동으로 Gazebo 시뮬레이터에 연결된 드론을 인식할 것입니다.
 
-
+---
 ### 4. ROS 2와 PX4 연동
 PX4는 Micro-XRCE-DDS Agent를 통해 ROS 2와 통신한다.
 
@@ -173,7 +173,7 @@ PX4는 Micro-XRCE-DDS Agent를 통해 ROS 2와 통신한다.
 	source /opt/ros/humble/setup.bash
 	colcon build
 
-
+---
 ### 5. PlotJuggler 설치 및 ros 2 연동
 Gazebo에서 ROS2 통신을 통해 px4_msg 데이터를 그래프로 시각화하기 위해 PlotJuggler 프로그램을 설치한다.
 즉, PlotJuggler는 Gazebo와 ROS2를 연동하여 시뮬레이션 데이터를 실시간으로 시각화하는 역할을 한다.
@@ -228,7 +228,7 @@ gedit ~/plotjuggler.sh
 
 	ros2 run plotjuggler plotjuggler
  
-
+---
 ### 6. 빠른 실행
 
 #### * 터미널 1: PX4 SITL & Gazebo 실행
