@@ -26,7 +26,10 @@ LTS: Long Term Support
 
 ---
 
-## 시뮬레이션 설치 및 연동 가이드 (Gazebo(garden)-PX4-Ros2(Humble)-QGroundControl-PlotJuggler)
+## 시뮬레이션 설치 및 연동 가이드
+#### Gazebo(garden)-PX4-Ros2(Humble)-QGroundControl-PlotJuggler 연동
+드론 시뮬레이션 환경 구축 및 QGC로 드론 상태를 확인하고 ROS 2를 통해 드론을 제어한다.
+
 ### 1. ROS 2 설치
 PX4 공식 문서에서는 우분투 22.04에 ROS 2 Humble Hawksbill을 설치하는 것을 권장한다.
 
@@ -170,21 +173,105 @@ PX4는 Micro-XRCE-DDS Agent를 통해 ROS 2와 통신한다.
 	colcon build
 
 
-#### 5) 연동 실행
+### 5. PlotJuggler 설치 및 ros 2 연동
+Gazebo에서 ROS2 통신을 통해 px4_msg 데이터를 그래프로 시각화하기 위해 PlotJuggler 프로그램을 설치한다.
+즉, PlotJuggler는 Gazebo와 ROS2를 연동하여 시뮬레이션 데이터를 실시간으로 시각화하는 역할을 한다.
+
+#### 1) (ROS 2 사용자를 위한) PlotJuggler 설치
+(ROS를 사용할 경우) snap 패키지의 경우 ROS 환경 변수를 제대로 인식하지 못하는 문제가 존재하여 Debian 버전으로 설치 진행한다.
+
+<br>
+* Snap 패키지 문제: Snap의 격리(Confinement)
+Snap은 앱과 그 종속성을 하나의 패키지로 묶어 시스템과 분리된 환경에서 실행되도록 설계되었다.
+이는 보안과 안정성을 높이지만, 동시에 Snap 패키지가 시스템에 전역적으로 설정된 환경 변수나 다른 파일 시스템 경로를 직접적으로 접근하는 것을 막는다.
+PlotJuggler의 경우, ROS2 워크스페이스(~/ros2_ws)를 source 명령어로 환경 변수에 추가했더라도 Snap으로 설치된 PlotJuggler는 이 경로를 인식하지 못하게 된다.<br>
+
+<br>
+
+[참고] <https://github.com/facontidavide/PlotJuggler>
+
+<br>
+ROS 사용자를 위한 Debian 패키지 설치
+
+	sudo apt install ros-$ROS_DISTRO-plotjuggler-ros
+
+ 
+#### 2) PlotJuggler 실행 방법 2가지
+
+[1] 실행 스크립트 사용
+ 1) 스크립트 파일 생성 및 코드 저장
+```
+gedit ~/plotjuggler.sh
+```
+
+주의: ros2_ws 폴더에 저장할 것
+
+ 2)  아래 코드를 복사/붙여넣기 한 후 저장
+
+	#!/bin/bash
+	source /opt/ros/humble/setup.bash
+	source ~/ros2_ws/install/setup.bash
+	plotjuggler
+
+ 3)  스크립트 실행 권한 부여
+
+	chmod +x ~/plotjuggler.sh
+
+ 4) PlotJuggler 실행
+```
+~/plotjuggler.sh
+```
+	
+
+[2] ROS 2에서 PlotJuggler 실행
+
+	ros2 run plotjuggler plotjuggler
+ 
+
+### 6. 연동 실행 (정리)
+
+#### * 터미널 1: PX4 SITL & Gazebo 실행
+
+	cd ~/PX4-Autopilot
+	make px4_sitl gz_x500
+ 
+
+#### * 터미널 2: Micro-XRCE-DDS Agent 실행
+
+	MicroXRCEAgent udp4 -p 8888
+ 
+
+#### * 터미널 3: QGroundControl 실행
+
+	cd ~/Downloads
+	chmod +x QGroundControl-x86_64.AppImage
+ 	./QGroundControl-x86_64.AppImage
+
+
+#### * 터미널 4: PlotJuggler 실행
+
+	cd  ros2_ws
+ 	ros2 run plotjuggler plotjuggler
+  
+
+#### * 터미널 5: ROS 2 패키지 실행 (예: 오프보드 제어)
+공식 예제 파일(offboard_control.cpp)을 사용하여 실행하였다.
+
+	cd ~/ros2_ws
+	source install/local_setup.bash
+	ros2 run px4_ros_com offboard_control
 
 
 
 
 
+<br>
+<br>
+<br>
 
+*폴더 삭제 방법
 
-
-
-
-
-
-
-
+	rm -rf 폴더명
 
 
  
