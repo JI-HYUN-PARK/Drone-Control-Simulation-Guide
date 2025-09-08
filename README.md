@@ -220,7 +220,7 @@ gedit ~/plotjuggler.sh
 
  4) PlotJuggler 실행
 ```
-~/plotjuggler.sh
+./plotjuggler.sh
 ```
 	
 
