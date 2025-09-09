@@ -218,14 +218,14 @@ gedit ~/plotjuggler.sh
 
 	chmod +x ~/plotjuggler.sh
 
- 4) PlotJuggler 실행
+ 4) PlotJuggler 실행  // plotjuggler.sh 폴더가 있는 파일에서 실행
 ```
+cd ros2_ws
 ./plotjuggler.sh
 ```
 	
 
-[2] ROS 2에서 PlotJuggler 실행
-
+[2] ROS 2에서 PlotJuggler 실행  (실행은 가능하나 ROS2 연결 문제 해결 진행중)
 	ros2 run plotjuggler plotjuggler
  
 ---
@@ -251,8 +251,7 @@ gedit ~/plotjuggler.sh
 
 #### * 터미널 4: PlotJuggler 실행
 
-	cd ~/ros2_ws
- 	ros2 run plotjuggler plotjuggler
+	./plotjuggler.sh
   
 
 #### * 터미널 5: ROS 2 패키지 실행 (예: 오프보드 제어)
