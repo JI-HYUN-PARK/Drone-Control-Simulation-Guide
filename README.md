@@ -251,7 +251,7 @@ gedit ~/plotjuggler.sh
 
 #### * 터미널 4: PlotJuggler 실행
 
-	cd  ros2_ws
+	cd ~/ros2_ws
  	ros2 run plotjuggler plotjuggler
   
 
