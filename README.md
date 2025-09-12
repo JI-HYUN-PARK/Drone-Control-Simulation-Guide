@@ -35,12 +35,12 @@ PX4 공식 문서에서는 우분투 22.04에 ROS 2 Humble Hawksbill을 설치�
 
 #### 1) 로케일 설정
    
-    ```
+    
     sudo apt update && sudo apt install locales  
     sudo locale-gen en_US en_US.UTF-8
     sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
     export LANG=en_US.UTF-8
-    ```
+    
      
 #### 2) ROS 2 저장소 추가
    
