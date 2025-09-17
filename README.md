@@ -134,8 +134,8 @@ QGroundControl-x86_64.AppImage 파일 다운받았다.
 다운로드한 파일이 있는 디렉토리로 이동하여 실행 권한을 부여하고 실행한다.
 
 	cd ~/Downloads  // 운영자는 Download 파일에 다운 받음
-	chmod +x ./QGroundControl.AppImage  // 실행 권한 부여
-	./QGroundControl.AppImage  // 실행
+	chmod +x ./QGroundControl-x86_64.AppImage  // 실행 권한 부여
+	./QGroundControl-x86_64.AppImage  // 실행
  
 QGC가 실행되면 자동으로 Gazebo 시뮬레이터에 연결된 드론을 인식할 것입니다.
 
