@@ -222,7 +222,7 @@ gedit ~/plotjuggler.sh
 
  4) PlotJuggler 실행  // plotjuggler.sh 폴더가 있는 파일에서 실행
 ```
-cd ros2_ws
+cd ~/ros2_ws
 ./plotjuggler.sh
 ```
  
