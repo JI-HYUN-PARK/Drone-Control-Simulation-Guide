@@ -197,9 +197,7 @@ ROS 사용자를 위한 Debian 패키지 설치
 	sudo apt install ros-$ROS_DISTRO-plotjuggler-ros
 
  
-#### 2) PlotJuggler 실행 방법 2가지
-
-[1] 실행 스크립트 사용
+#### 2) PlotJuggler 실행 방법
  1) 스크립트 파일 생성 및 코드 저장
 ```
 gedit ~/plotjuggler.sh
@@ -210,23 +208,23 @@ gedit ~/plotjuggler.sh
  2)  아래 코드를 복사/붙여넣기 한 후 저장
 
 	#!/bin/bash
+
+	echo "Sourcing ROS environment..."
 	source /opt/ros/humble/setup.bash
 	source ~/ros2_ws/install/setup.bash
-	plotjuggler
+
+	echo "Starting PlotJuggler..."
+	ros2 run plotjuggler plotjuggler
 
  3)  스크립트 실행 권한 부여
 
-	chmod +x ~/plotjuggler.sh
+	chmod +x ./plotjuggler.sh
 
  4) PlotJuggler 실행  // plotjuggler.sh 폴더가 있는 파일에서 실행
 ```
 cd ros2_ws
 ./plotjuggler.sh
 ```
-	
-
-[2] ROS 2에서 PlotJuggler 실행  (실행은 가능하나 ROS2 연결 문제 해결 진행중)
-	ros2 run plotjuggler plotjuggler
  
 ---
 ### 6. 빠른 실행
